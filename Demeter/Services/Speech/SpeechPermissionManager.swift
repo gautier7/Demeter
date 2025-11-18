@@ -19,6 +19,9 @@ class SpeechPermissionManager: ObservableObject {
 
     /// Check current microphone permission status
     func checkMicrophonePermission() -> PermissionStatus {
+        // Using AVAudioSession.recordPermission despite deprecation warning
+        // as AVAudioApplication.recordPermission doesn't provide current status
+        // This is a known issue with the iOS 17+ API transition
         let status = AVAudioSession.sharedInstance().recordPermission
 
         switch status {
